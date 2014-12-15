@@ -1,4 +1,4 @@
 sddm-theme
 ==========
 
-The SDDM theme for Quantum OS
+The [SDDM](https://github.com/sddm/sddm) theme for [Quantum OS](http://quantum-os.github.io)
