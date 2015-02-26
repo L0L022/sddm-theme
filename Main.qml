@@ -1,10 +1,13 @@
 import QtQuick 2.0
+import QtQuick.Layouts 1.1
 import Material 0.1
 import Material.Extras 0.1
 import Material.Desktop 0.1
 
 MainView {
 	anchors.fill: parent
+
+	theme.accentColor: Palette.colors["blue"]["500"]
 
 	Repeater {
 		model: screenModel
@@ -28,7 +31,7 @@ MainView {
 		Row {
 			anchors.centerIn: parent
 
-			spacing: units.dp(16)
+			spacing: units.dp(32)
 
 			Repeater {
 				id: users
@@ -37,6 +40,8 @@ MainView {
 				delegate: View {
 					elevation: 2
 					radius: units.dp(2)
+
+					anchors.verticalCenter: parent.verticalCenter
 
 					width: selectedUser == index ? units.dp(250) : units.dp(200)
 					height: selectedUser == index ? units.dp(260) : units.dp(210)
@@ -52,7 +57,7 @@ MainView {
 					Ink {
 						anchors.fill: parent
 
-						z: -1
+						z: 0
 
 						onClicked: {
 							if (selectedUser == index) {
@@ -65,6 +70,7 @@ MainView {
 
 					Column {
 						id: column
+
 						width: parent.width
 
 						anchors {
@@ -79,10 +85,10 @@ MainView {
 
 							anchors.horizontalCenter: parent.horizontalCenter
 
-							visible: status == Image.Ready
+							visible: status == Image.Ready && String(source).indexOf("sddm/faces/default.face.icon") == -1
 							width: units.dp(100)
 							height: width/sourceSize.width * sourceSize.height
-							source: homeDir + "/.face"
+							source: icon
 
 							Rectangle {
 								anchors.fill: parent
@@ -94,7 +100,7 @@ MainView {
 
 						Rectangle {
 							anchors.horizontalCenter: parent.horizontalCenter
-							visible: image.status != Image.Ready
+							visible: !image.visible
 							width: image.width
 							height: width
 							border.color: Qt.darker(color, 1.2)
@@ -124,13 +130,15 @@ MainView {
 							style: "title"
 						}
 
-						Item {
+						RowLayout {
 							anchors.horizontalCenter: parent.horizontalCenter
 							width: units.dp(250) - parent.anchors.margins * 2
 							height: visible ? field.height : 0
 
 							visible: opacity > 0
 							opacity: index == selectedUser ? 1 : 0
+
+							spacing: units.dp(8)
 
 							Behavior on height {
 								NumberAnimation { duration: 200 }
@@ -151,8 +159,21 @@ MainView {
 								placeholderText: "Password"
 								input.echoMode: TextInput.Password
 
+								Layout.fillWidth: true
+								Layout.alignment: Qt.AlignVCenter
+
 								onAccepted: {
 									sddm.login(name, text, sessionModel.lastIndex)
+								}
+							}
+
+							IconButton {
+								Layout.alignment: Qt.AlignVCenter
+								name: "content/send"
+								enabled: field.text != ""
+
+								onClicked: {
+									field.accepted()
 								}
 							}
 						}
