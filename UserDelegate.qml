@@ -105,7 +105,7 @@ View {
 
         Label {
             id: label
-            text: realName
+            text: realName || name
             height: visible ? implicitHeight + units.dp(8) : units.dp(32)
             verticalAlignment: Text.AlignVCenter
             //visible: index != selectedUser
