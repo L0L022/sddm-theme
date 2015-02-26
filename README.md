@@ -1,4 +1,4 @@
-sddm-theme
-==========
+Papyros SDDM Theme
+==================
 
-The [SDDM](https://github.com/sddm/sddm) theme for [Quantum OS](http://quantum-os.github.io)
+The [SDDM](https://github.com/sddm/sddm) login screen theme for [Papyros](http://papyros.io) following Material Design.

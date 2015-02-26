@@ -1,3 +1,20 @@
+/*
+* Papyros SDDM theme - The SDDM theme for Papyros following Material Design
+* Copyright (C) 2015 Michael Spencer <sonrisesoftware@gmail.com>
+*
+* This program is free software: you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation, either version 3 of the License, or
+* (at your option) any later version.
+*
+* This program is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program. If not, see <http://www.gnu.org/licenses/>.
+*/
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import Material 0.1
@@ -37,148 +54,29 @@ MainView {
 				id: users
 				model: userModel
 
-				delegate: View {
-					elevation: 2
-					radius: units.dp(2)
+				delegate: UserDelegate {}
+			}
+		}
 
-					anchors.verticalCenter: parent.verticalCenter
+		Wave {
+			id: background
 
-					width: selectedUser == index ? units.dp(250) : units.dp(200)
-					height: selectedUser == index ? units.dp(260) : units.dp(210)
+			color: Palette.colors.blue["500"]
+		}
 
-					Behavior on width {
-						NumberAnimation { duration: 250 }
-					}
+		Label {
+			id: label
 
-					Behavior on height {
-						NumberAnimation { duration: 250 }
-					}
+			anchors.centerIn: parent
+			//style: "headline"
+			style: "display1"
+			text: "Signing in..."
+			color: "white"
 
-					Ink {
-						anchors.fill: parent
+			opacity: background.opened ? 1 : 0
 
-						z: 0
-
-						onClicked: {
-							if (selectedUser == index) {
-								selectedUser = -1
-							} else {
-								selectedUser = index
-							}
-						}
-					}
-
-					Column {
-						id: column
-
-						width: parent.width
-
-						anchors {
-							left: parent.left
-							right: parent.right
-							top: parent.top
-							margins: units.dp(32)
-						}
-
-						CircleImage {
-							id: image
-
-							anchors.horizontalCenter: parent.horizontalCenter
-
-							visible: status == Image.Ready && String(source).indexOf("sddm/faces/default.face.icon") == -1
-							width: units.dp(100)
-							height: width/sourceSize.width * sourceSize.height
-							source: icon
-
-							Rectangle {
-								anchors.fill: parent
-								color: "transparent"
-								border.color: Qt.rgba(0,0,0,0.3)
-								radius: width/2
-							}
-						}
-
-						Rectangle {
-							anchors.horizontalCenter: parent.horizontalCenter
-							visible: !image.visible
-							width: image.width
-							height: width
-							border.color: Qt.darker(color, 1.2)
-							color: Qt.rgba(0.8,0.8,0.8, 1)
-							radius: width/2
-
-							Icon {
-								anchors.centerIn: parent
-								size: parent.width * 2/3
-								color: "white"
-								name: "social/person"
-							}
-						}
-
-						Item {
-							width: parent.width
-							height: units.dp(24)
-						}
-
-						Label {
-							id: label
-							text: realName
-							height: visible ? implicitHeight + units.dp(8) : units.dp(32)
-							verticalAlignment: Text.AlignVCenter
-							//visible: index != selectedUser
-							anchors.horizontalCenter: parent.horizontalCenter
-							style: "title"
-						}
-
-						RowLayout {
-							anchors.horizontalCenter: parent.horizontalCenter
-							width: units.dp(250) - parent.anchors.margins * 2
-							height: visible ? field.height : 0
-
-							visible: opacity > 0
-							opacity: index == selectedUser ? 1 : 0
-
-							spacing: units.dp(8)
-
-							Behavior on height {
-								NumberAnimation { duration: 200 }
-							}
-
-							Behavior on opacity {
-								NumberAnimation { duration: 200 }
-							}
-
-							onVisibleChanged: {
-								if (!visible)
-									field.text = ""
-							}
-
-							TextField {
-								id: field
-								width: parent.width
-								placeholderText: "Password"
-								input.echoMode: TextInput.Password
-
-								Layout.fillWidth: true
-								Layout.alignment: Qt.AlignVCenter
-
-								onAccepted: {
-									sddm.login(name, text, sessionModel.lastIndex)
-								}
-							}
-
-							IconButton {
-								Layout.alignment: Qt.AlignVCenter
-								name: "content/send"
-								enabled: field.text != ""
-
-								onClicked: {
-									field.accepted()
-								}
-							}
-						}
-					}
-				}
+			Behavior on opacity {
+				NumberAnimation {}
 			}
 		}
 	}
