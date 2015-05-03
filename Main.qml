@@ -48,7 +48,7 @@ MainView {
 		}
 	}
 
-	property int selectedUser: -1
+	property int selectedUser: users.lastIndex
 
 	Item {
 		id: primaryScreen
