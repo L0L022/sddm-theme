@@ -142,6 +142,7 @@ View {
                 width: parent.width
                 placeholderText: "Password"
                 input.echoMode: TextInput.Password
+                focus: selectedUser == index
 
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignVCenter
