@@ -19,7 +19,6 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import Material 0.1
 import Material.Extras 0.1
-import SddmComponents 2.0
 
 View {
     elevation: 2
@@ -37,8 +36,6 @@ View {
     Behavior on height {
         NumberAnimation { duration: 250 }
     }
-
-    TextConstants { id: textConstants }
 
     Connections {
         target: sddm
@@ -151,7 +148,7 @@ View {
             TextField {
                 id: field
                 width: parent.width
-                placeholderText: textConstants.password
+                placeholderText: qsTr("Password")
                 helperText: hasError ? qsTr("Password is incorrect.") : ""
                 input.echoMode: TextInput.Password
                 focus: selectedUser == index
