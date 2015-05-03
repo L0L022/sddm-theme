@@ -63,5 +63,13 @@ View {
             visible: sddm.canPowerOff
             onClicked: sddm.powerOff()
         }
+        
+        IconButton {
+            name: "navigation/refresh"
+            size: units.dp(20)
+            color: "gray"
+            visible: sddm.canReboot
+            onClicked: sddm.reboot()
+        }
     }
 }
