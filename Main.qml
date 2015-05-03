@@ -20,11 +20,18 @@ import QtQuick.Layouts 1.1
 import Material 0.1
 import Material.Extras 0.1
 import Material.Desktop 0.1
+import SddmComponents 2.0
 
 MainView {
 	anchors.fill: parent
 
 	theme.accentColor: Palette.colors["blue"]["500"]
+
+	Connections {
+		target: sddm
+	
+		onLoginFailed: background.close(primaryScreen.width/2, primaryScreen.height/2)
+	}
 
 	Repeater {
 		model: screenModel
