@@ -40,6 +40,14 @@ View {
 
     TextConstants { id: textConstants }
 
+    Connections {
+        target: sddm
+
+        onLoginFailed: {
+            field.hasError = true
+        }
+    }
+
     Ink {
         anchors.fill: parent
 
@@ -144,6 +152,7 @@ View {
                 id: field
                 width: parent.width
                 placeholderText: textConstants.password
+                helperText: hasError ? qsTr("Password is incorrect.") : ""
                 input.echoMode: TextInput.Password
                 focus: selectedUser == index
 
@@ -171,6 +180,9 @@ View {
     Timer {
         id: timer
         interval: 500
-        onTriggered: sddm.login(name, field.text, sessionModel.lastIndex)
+        onTriggered: {
+            sddm.login(name, field.text, sessionModel.lastIndex)
+            field.txt = ""
+        }
     }
 }
