@@ -29,9 +29,15 @@ MainView {
 	Repeater {
 		model: screenModel
 
-		Image {
+		Background {
 			x: geometry.x; y: geometry.y; width: geometry.width; height:geometry.height
-			source: "wallpaper.png"
+			source: config.background
+			fillMode: Image.PreserveAspectCrop
+			onStatusChanged: {
+				if (status == Image.Error && source != config.defaultBackground) {
+	    				source = config.defaultBackground
+				}
+			}
 		}
 	}
 
