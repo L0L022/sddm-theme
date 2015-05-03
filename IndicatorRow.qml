@@ -56,10 +56,12 @@ View {
             size: units.dp(20)
         }
 
-        Icon {
+        IconButton {
             name: "awesome/power_off"
             size: units.dp(20)
             color: "gray"
+            visible: sddm.canPowerOff
+            onClicked: sddm.powerOff()
         }
     }
 }
