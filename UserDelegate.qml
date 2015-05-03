@@ -19,6 +19,7 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import Material 0.1
 import Material.Extras 0.1
+import SddmComponents 2.0
 
 View {
     elevation: 2
@@ -36,6 +37,8 @@ View {
     Behavior on height {
         NumberAnimation { duration: 250 }
     }
+
+    TextConstants { id: textConstants }
 
     Ink {
         anchors.fill: parent
@@ -140,7 +143,7 @@ View {
             TextField {
                 id: field
                 width: parent.width
-                placeholderText: "Password"
+                placeholderText: textConstants.password
                 input.echoMode: TextInput.Password
                 focus: selectedUser == index
 
