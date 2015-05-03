@@ -34,7 +34,7 @@ UPowerConnection {
             var device = devices[i]
 
             print(device.type, device.percentage)
-            if (device.type == UPowerDeviceType.Battery) {
+            if (device.type === UPowerDeviceType.Battery) {
                 primaryDevice = device
             }
         }
@@ -63,8 +63,8 @@ UPowerConnection {
 
         print(level, device.state)
 
-        if (device.state == UPowerDeviceState.Charging ||
-                device.state == UPowerDeviceState.FullyCharged)
+        if (device.state === UPowerDeviceState.Charging ||
+                device.state === UPowerDeviceState.FullyCharged)
             return "device/battery_charging_" + level
         else
             return "device/battery_" + level
@@ -73,11 +73,11 @@ UPowerConnection {
     function deviceSummary(device) {
         var percent = device.percentage + "%"
 
-        if (device.state == UPowerDeviceState.Charging) {
+        if (device.state === UPowerDeviceState.Charging) {
             return "%1 until full".arg(DateUtils.shortDuration(device.timeToFull * 1000, 'm'))
-        } else if (device.state == UPowerDeviceState.Discharging && device.timeToEmpty != 0) {
+        } else if (device.state === UPowerDeviceState.Discharging && device.timeToEmpty != 0) {
             return "%1 remaining".arg(DateUtils.shortDuration(device.timeToEmpty * 1000, 'm'))
-        } else if (device.state == UPowerDeviceState.FullyCharged) {
+        } else if (device.state === UPowerDeviceState.FullyCharged) {
             return "Fully Charged"
         } else {
             return percent

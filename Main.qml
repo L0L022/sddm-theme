@@ -41,7 +41,7 @@ MainView {
 			source: config.background
 			fillMode: Image.PreserveAspectCrop
 			onStatusChanged: {
-				if (status == Image.Error && source != config.defaultBackground) {
+				if (status === Image.Error && source !== config.defaultBackground) {
 	    				source = config.defaultBackground
 				}
 			}
@@ -83,7 +83,7 @@ MainView {
 			anchors.centerIn: parent
 			//style: "headline"
 			style: "display1"
-			text: "Signing in..."
+			text: qsTr("Signing in...")
 			color: "white"
 
 			opacity: background.opened ? 1 : 0

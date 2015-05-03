@@ -26,8 +26,8 @@ View {
 
     anchors.verticalCenter: parent.verticalCenter
 
-    width: selectedUser == index ? units.dp(230) : units.dp(180)
-    height: selectedUser == index ? units.dp(240) : units.dp(190)
+    width: selectedUser === index ? units.dp(230) : units.dp(180)
+    height: selectedUser === index ? units.dp(240) : units.dp(190)
 
     Behavior on width {
         NumberAnimation { duration: 250 }
@@ -51,7 +51,7 @@ View {
         z: 0
 
         onClicked: {
-            if (selectedUser == index) {
+            if (selectedUser === index) {
                 selectedUser = -1
             } else {
                 selectedUser = index
@@ -76,7 +76,7 @@ View {
 
             anchors.horizontalCenter: parent.horizontalCenter
 
-            visible: status == Image.Ready && String(source).indexOf("sddm/faces/default.face.icon") == -1
+            visible: status === Image.Ready && String(source).indexOf("sddm/faces/default.face.icon") === -1
             width: units.dp(80)
             height: width/sourceSize.width * sourceSize.height
             source: icon
@@ -116,7 +116,7 @@ View {
             text: realName || name
             height: visible ? implicitHeight + units.dp(8) : units.dp(32)
             verticalAlignment: Text.AlignVCenter
-            //visible: index != selectedUser
+            //visible: index !== selectedUser
             anchors.horizontalCenter: parent.horizontalCenter
 
             font.pixelSize: units.dp(18)
@@ -128,7 +128,7 @@ View {
             height: visible ? field.height : 0
 
             visible: opacity > 0
-            opacity: index == selectedUser ? 1 : 0
+            opacity: index === selectedUser ? 1 : 0
 
             spacing: units.dp(8)
 
@@ -151,7 +151,7 @@ View {
                 placeholderText: qsTr("Password")
                 helperText: hasError ? qsTr("Password is incorrect.") : ""
                 input.echoMode: TextInput.Password
-                focus: selectedUser == index
+                focus: selectedUser === index
 
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignVCenter
@@ -165,7 +165,7 @@ View {
             IconButton {
                 Layout.alignment: Qt.AlignVCenter
                 name: "content/send"
-                enabled: field.text != ""
+                enabled: field.text !== ""
 
                 onClicked: {
                     field.accepted()
