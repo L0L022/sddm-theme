@@ -179,7 +179,7 @@ View {
         id: timer
         interval: 500
         onTriggered: {
-            sddm.login(name, field.text, sessionModel.lastIndex)
+            sddm.login(name, field.text, selectedSession)
             field.text = ""
         }
     }

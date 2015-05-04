@@ -16,6 +16,7 @@
 * along with this program. If not, see <http://www.gnu.org/licenses/>.
 */
 import QtQuick 2.0
+import QtQuick.Controls 1.2 as QuickControls
 import Material 0.1
 
 View {
@@ -54,6 +55,69 @@ View {
         Icon {
             name: upower.deviceIcon(upower.primaryDevice)
             size: units.dp(20)
+        }
+
+        IconButton {
+            name: "awesome/desktop"
+            size: units.dp(20)
+            color: "gray"
+            onClicked: sessionDialog.show()
+        }
+
+        Dialog {
+            id: sessionDialog
+            title: qsTr("Select session")
+
+            property int index: selectedSession
+
+            QuickControls.ExclusiveGroup {
+                id: sessionGroup
+            }
+
+            Repeater {
+                id: repeater
+                model: sessionModel
+
+                RadioButton {
+                    text: name
+                    checked: index === sessionDialog.index
+                    exclusiveGroup: sessionGroup
+                    onClicked: { sessionDialog.index = index; checked = true }
+                }
+            }
+
+            onAccepted: selectedSession = index
+        }
+
+        IconButton {
+            name: "hardware/keyboard"
+            size: units.dp(20)
+            color: "gray"
+            onClicked: layoutDialog.show()
+        }
+
+        Dialog {
+            id: layoutDialog
+            title: qsTr("Select layout")
+
+            property int index: keyboard.currentLayout
+
+            QuickControls.ExclusiveGroup {
+                id: layoutGroup
+            }
+
+            Repeater {
+                model: keyboard.layouts
+
+                RadioButton {
+                    text: modelData.longName
+                    checked: index === layoutDialog.index
+                    exclusiveGroup: layoutGroup
+                    onClicked: { layoutDialog.index = index; checked = true }
+                }
+            }
+
+            onAccepted: keyboard.currentLayout = index
         }
 
         IconButton {

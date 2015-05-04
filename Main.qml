@@ -49,6 +49,7 @@ MainView {
 	}
 
 	property int selectedUser: users.lastIndex
+	property int selectedSession: sessionModel.lastIndex
 
 	Item {
 		id: primaryScreen
@@ -70,6 +71,11 @@ MainView {
 				delegate: UserDelegate {}
 			}
 		}
+
+		OverlayLayer {
+                    id: dialogOverlayLayer
+                    objectName: "dialogOverlayLayer"
+                }
 
 		Wave {
 			id: background
