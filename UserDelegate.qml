@@ -143,6 +143,7 @@ View {
             onVisibleChanged: {
                 if (!visible)
                 field.text = ""
+                field.hasError = false
             }
 
             TextField {
@@ -179,7 +180,7 @@ View {
         interval: 500
         onTriggered: {
             sddm.login(name, field.text, sessionModel.lastIndex)
-            field.txt = ""
+            field.text = ""
         }
     }
 }
