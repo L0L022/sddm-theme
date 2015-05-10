@@ -25,6 +25,7 @@ import SddmComponents 2.0
 MainView {
 	anchors.fill: parent
 
+	theme.primaryColor: Palette.colors["blue"]["500"]
 	theme.accentColor: Palette.colors["blue"]["500"]
 
 	Connections {
@@ -38,6 +39,7 @@ MainView {
 
 		Background {
 			x: geometry.x; y: geometry.y; width: geometry.width; height:geometry.height
+			z: -1
 			source: config.background
 			fillMode: Image.PreserveAspectCrop
 			onStatusChanged: {
@@ -56,13 +58,14 @@ MainView {
 
 		property var geometry: screenModel.geometry(screenModel.primary)
 		x: geometry.x; y: geometry.y; width: geometry.width; height: geometry.height
+		z: -1
 
 		IndicatorRow {}
 
 		Row {
 			anchors.centerIn: parent
 
-			spacing: units.dp(32)
+			spacing: Units.dp(32)
 
 			Repeater {
 				id: users
@@ -71,11 +74,6 @@ MainView {
 				delegate: UserDelegate {}
 			}
 		}
-
-		OverlayLayer {
-                    id: dialogOverlayLayer
-                    objectName: "dialogOverlayLayer"
-                }
 
 		Wave {
 			id: background

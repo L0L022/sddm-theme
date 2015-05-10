@@ -22,12 +22,12 @@ import Material.Extras 0.1
 
 View {
     elevation: 2
-    radius: units.dp(2)
+    radius: Units.dp(2)
 
     anchors.verticalCenter: parent.verticalCenter
 
-    width: selectedUser === index ? units.dp(230) : units.dp(180)
-    height: selectedUser === index ? units.dp(240) : units.dp(190)
+    width: selectedUser === index ? Units.dp(230) : Units.dp(180)
+    height: selectedUser === index ? Units.dp(240) : Units.dp(190)
 
     Behavior on width {
         NumberAnimation { duration: 250 }
@@ -68,7 +68,7 @@ View {
             left: parent.left
             right: parent.right
             top: parent.top
-            margins: units.dp(32)
+            margins: Units.dp(32)
         }
 
         CircleImage {
@@ -77,7 +77,7 @@ View {
             anchors.horizontalCenter: parent.horizontalCenter
 
             visible: status === Image.Ready && String(source).indexOf("sddm/faces/default.face.icon") === -1
-            width: units.dp(80)
+            width: Units.dp(80)
             height: width/sourceSize.width * sourceSize.height
             source: icon
 
@@ -108,29 +108,29 @@ View {
 
         Item {
             width: parent.width
-            height: units.dp(24)
+            height: Units.dp(24)
         }
 
         Label {
             id: label
             text: realName || name
-            height: visible ? implicitHeight + units.dp(8) : units.dp(32)
+            height: visible ? implicitHeight + Units.dp(8) : Units.dp(32)
             verticalAlignment: Text.AlignVCenter
             //visible: index !== selectedUser
             anchors.horizontalCenter: parent.horizontalCenter
 
-            font.pixelSize: units.dp(18)
+            font.pixelSize: Units.dp(18)
         }
 
         RowLayout {
             anchors.horizontalCenter: parent.horizontalCenter
-            width: units.dp(250) - parent.anchors.margins * 2
+            width: Units.dp(250) - parent.anchors.margins * 2
             height: visible ? field.height : 0
 
             visible: opacity > 0
             opacity: index === selectedUser ? 1 : 0
 
-            spacing: units.dp(8)
+            spacing: Units.dp(8)
 
             Behavior on height {
                 NumberAnimation { duration: 200 }
@@ -151,7 +151,7 @@ View {
                 width: parent.width
                 placeholderText: qsTr("Password")
                 helperText: hasError ? qsTr("Password is incorrect.") : ""
-                input.echoMode: TextInput.Password
+                echoMode: TextInput.Password
                 focus: selectedUser === index
 
                 Layout.fillWidth: true
@@ -165,7 +165,7 @@ View {
 
             IconButton {
                 Layout.alignment: Qt.AlignVCenter
-                name: "content/send"
+                iconName: "content/send"
                 enabled: field.text !== ""
 
                 onClicked: {
